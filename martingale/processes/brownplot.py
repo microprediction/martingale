@@ -2,12 +2,19 @@ import matplotlib.pyplot as plt
 
 def noise_plot(gen):
     # Generate data
-    n = 100
-    dt = 0.1
+    n = 200
     x_values = []
     y_values = []
 
-    for obs in brown_gen(n=n, dt=dt):
+    gen = brown_gen(n=10500)
+
+    count = 0
+    for _ in gen: # settle to ergodic avg
+        count += 1
+        if count>10000:
+            break
+
+    for obs in gen:
         x_values.append(obs['x'])
         y_values.append(obs['y'])
 

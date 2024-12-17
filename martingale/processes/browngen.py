@@ -59,7 +59,9 @@ def brown_parameters():
         dict of parameters
     """
 
-    scale = np.exp(10*np.random.randn())  # Very diffuse
+    dt = 0.1*np.exp(np.random.randn()) # This could be factored through, but we leave it here to vary the relative noise level
+
+    scale = np.exp(10*np.random.randn())
 
     rho = sample_rho()
 
@@ -83,6 +85,7 @@ def brown_parameters():
     noise_speed = sample_noise_speed_beta()
 
     return {
+        'dt':dt,
         'scale': scale,
         'rho': rho,
         'jump_size': jump_size,
@@ -94,7 +97,7 @@ def brown_parameters():
         'noise_speed':noise_speed
     }
 
-def generate_increments(n, dt):
+def generate_increments(n,dt):
     """
     Generate the increments needed for the simulation:
     - dW_t, dZ_t, dX_t: independent Brownian increments ~ N(0, dt)
@@ -146,7 +149,7 @@ def generate_poisson_increments(n, dt, gamma):
     """
     return np.random.poisson(gamma * dt, size=n)
 
-def simulate_processes(n, dt, params):
+def simulate_processes(n, params):
     """
     Simulate the processes step-by-step and yield one dict at a time.
 
@@ -161,6 +164,7 @@ def simulate_processes(n, dt, params):
 
     Initialize x_0, v_0, s_0 = 0.
     """
+    dt = params['dt']
     scale = params['scale']
     rho = params['rho']
     jump_size = params['jump_size']
@@ -214,7 +218,7 @@ def simulate_processes(n, dt, params):
         v = v_new
         s = s_new
 
-def brown_gen(n=1000, dt=0.01, params=None):
+def brown_gen(n=1000, params=None):
     """
     A generator function that yields one dict at a time with keys 'x' and 'y'.
 
@@ -225,10 +229,10 @@ def brown_gen(n=1000, dt=0.01, params=None):
     print(params)
 
     # Simulate and yield records
-    for record in simulate_processes(n, dt, params):
+    for record in simulate_processes(n, params):
         yield record
 
 
 if __name__=='__main__':
-   for obs in brown_gen(n=10, dt=0.1):
+   for obs in brown_gen(n=10):
       print(obs)
