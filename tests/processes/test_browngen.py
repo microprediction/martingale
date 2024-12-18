@@ -3,8 +3,6 @@ import numpy as np
 from scipy.stats import beta
 from unittest.mock import patch
 
-# The code under test is assumed to be in a file named browngen.py
-# Make sure your test file is in the same directory or properly import the tested functions.
 from martingale.processes.browngen import (
     sample_correlation_rho,
     sample_mean_reversion_speed,
