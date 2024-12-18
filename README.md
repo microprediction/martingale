@@ -1,5 +1,7 @@
 # martingale puzzles 
 
+Nowcasting of martingales observed with noise
+
 ### Puzzles:
 
 1. A generative model where martingales play a central role
@@ -14,9 +16,11 @@
 
 ### Generative models and assessment 
 
-The generative model comprises two stages: 
-  1. Generation of parameters from a diffuse prior and 
-  2. Generation of a stochastic process of some kind (possibly multi-dimensional, possibly structured)
+The generative model assessment comprises three stages: 
+
+  1. Generation of parameters from a diffuse prior and
+  2. Burn-in period to approximate sampling from the ergodic distribution
+  3. A weighted running computation of a cost function where early data points are more important that later ones 
   
-Multiple sequences are used in the evaluation simultaneously
+We'd like to encourage algorithms to learn quickly. 
 
