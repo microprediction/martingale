@@ -9,8 +9,9 @@ def sample_rho(alpha_param=15, beta_param=5):
     rho = 2 * X - 1
     return rho
 
-def sample_kappa_beta(low=0.001, high=1.0, alpha_param=5, beta_param=2):
+def sample_kappa_beta(low=0.05, high=1.0, alpha_param=5, beta_param=2):
     # kappa: mean reversion for vol process v_t
+    # If this is too low it can lead to instability
     X = beta.rvs(alpha_param, beta_param)
     return low + (high - low)*X
 
@@ -195,11 +196,13 @@ def simulate_processes(n, params):
         dJ = dN[t] - gamma * dt  # compensated jump increment
 
         # Update v, the vol driving process
+        MAX_V = 10.0  #
         dv = -kappa * v * dt + dZ[t] + jump_size * dJ
         v_new = v + dv
+        v_new = min(v_new, MAX_V)
 
         # Update x
-        dx = scale * np.exp(v) * (dW[t] + rho * dZ[t]) * math.sqrt(dt)
+        dx = scale * np.exp(v) * (dW[t] + rho * dZ[t]) * math.sqrt(dt)   # <--- FIXME Prevent overflow errors here
         x_new = x + dx
 
         # Update s ... the noise scale
