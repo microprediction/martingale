@@ -236,6 +236,10 @@ def brown_gen(n=1000, params=None):
     for record in simulate_processes(n, params):
         yield record
 
+
 if __name__ == '__main__':
-    for obs in brown_gen(n=10):
-        print(obs)
+    from martingale.modelplot import model_plot
+    from martingale.benchmarks.brownbenchmark import BrownBenchmark
+
+    while True:
+        model_plot(brown_gen(n=10000), cls=BrownBenchmark)
