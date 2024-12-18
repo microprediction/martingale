@@ -1,5 +1,7 @@
 # martingale puzzles 
 
+Nowcasting of martingales observed with noise
+
 ### Puzzles:
 
 1. A generative model where martingales play a central role
