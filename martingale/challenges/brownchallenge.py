@@ -1,4 +1,4 @@
-from martingale.evaluator import evaluator
+from martingale.evaluation import evaluator
 from martingale.benchmarks.brownbenchmark import BrownBenchmark
 from martingale.processes.browngen import brown_gen
 from martingale.stats.fewmean import FEWMean
