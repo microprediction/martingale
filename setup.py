@@ -7,7 +7,7 @@ README = (HERE / "README.md").read_text()
 
 setup(
     name="martingale",
-    version="0.0.5",
+    version="0.0.6",
     description="Martingale generation, puzzles and filtering",
     long_description=README,
     long_description_content_type="text/markdown",
@@ -21,6 +21,10 @@ setup(
         "Programming Language :: Python :: 3.8",
     ],
     packages=["martingale",
+              "martingale.processes",
+              "martingale.benchmarks",
+              "martingale.challenges",
+              "martingale.stats"
               ],
     test_suite='pytest',
     tests_require=['pytest','riskparityportfolio'],
