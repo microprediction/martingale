@@ -1,6 +1,8 @@
 # martingale puzzles 
 
-Nowcasting of martingales observed with noise
+Nowcasting of martingales observed with noise. 
+
+Status: under construction
 
 ### Puzzles:
 
